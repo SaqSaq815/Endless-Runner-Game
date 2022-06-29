@@ -12,12 +12,17 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myRigidody = GetComponent<RigidBody2D>();
+        myRigidody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        myRigidody.velocity = new Vector2();
+        myRigidody.velocity = new Vector2(moveSpeed, myRigidody.velocity.y);
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) // change these fo swipes for mobile!!
+        {
+            myRigidody.velocity = new Vector2(myRigidody.velocity.x, JumpForce);
+        }
     }
 }

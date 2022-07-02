@@ -136,7 +136,8 @@ GameObject:
   - component: {fileID: 943611627}
   - component: {fileID: 943611626}
   - component: {fileID: 943611630}
-  m_Layer: 0
+  - component: {fileID: 943611631}
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,6 +272,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   JumpForce: 5
+  grounded: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!95 &943611631
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943611625}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 30de4faf2b7dac5469ee28ff6011d62d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1222137885
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +307,7 @@ GameObject:
   - component: {fileID: 1222137888}
   - component: {fileID: 1222137887}
   - component: {fileID: 1222137886}
+  - component: {fileID: 1222137889}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -355,6 +381,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1222137889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222137885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2407964ad0f9096469278a6919e0fdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePlayer: {fileID: 0}
 --- !u!1 &1537511703
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +406,7 @@ GameObject:
   - component: {fileID: 1537511706}
   - component: {fileID: 1537511705}
   - component: {fileID: 1537511704}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

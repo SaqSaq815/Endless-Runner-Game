@@ -14,19 +14,20 @@ public class Player : MonoBehaviour
 
     private Collider2D myCollider;
 
+    private Animator myAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
         myRigidody = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<Collider2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         grounded = Physics2D.IsTouchingLayers(myCollider, whatIsGround);
-
-
 
         myRigidody.velocity = new Vector2(moveSpeed, myRigidody.velocity.y);
 
@@ -37,5 +38,8 @@ public class Player : MonoBehaviour
                 myRigidody.velocity = new Vector2(myRigidody.velocity.x, JumpForce);
             }
         }
+
+        myAnimator.SetFloat("Speed", myRigidody.velocity.x);
+        myAnimator.SetBool("Grounded", grounded);
     }
 }

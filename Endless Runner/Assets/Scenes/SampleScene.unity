@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObject: {fileID: 7451532233053735258, guid: a830e762b17480d4f89bfe9a91bb0237, type: 3}
-  pooledAmount: 6
+  pooledAmount: 5
 --- !u!1 &492794033
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,12 +677,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088b033732acd914ea8680d45d39a9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlatform: {fileID: 7451532233053735258, guid: a830e762b17480d4f89bfe9a91bb0237, type: 3}
+  thePlatform: {fileID: 0}
   generationPoint: {fileID: 984352731}
-  distanceBetween: 3
+  distanceBetween: 10
   distanceBetweenMin: 1
-  distanceBetweenMax: 5
-  theObjectPool: {fileID: 466389238}
+  distanceBetweenMax: 10
+  thePlatforms:
+  - {fileID: 1917327218868303504, guid: 8bfd787bd171110419085560141a05aa, type: 3}
+  - {fileID: 7965884816246872520, guid: b56a387d5b2769349972cd0209269b88, type: 3}
+  - {fileID: 7451532233053735258, guid: a830e762b17480d4f89bfe9a91bb0237, type: 3}
+  - {fileID: 6580630095400425952, guid: 43db9f81197162945ab78b3f23ec2c45, type: 3}
 --- !u!4 &552188750
 Transform:
   m_ObjectHideFlags: 0

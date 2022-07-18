@@ -5,14 +5,23 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float moveSpeed;
+
+    public float speedMultiplier;
+    public float speedIncreaseMilestone;
+    private float speedMilestoneCount;
+
     public float JumpForce;
+    public float jumpTime;
+    private float jumpTimeCounter;
 
     private Rigidbody2D myRigidody;
 
     public bool grounded;
     public LayerMask whatIsGround;
+    public Transform groundCheck;
+    public float groundCheckRadius;
 
-    private Collider2D myCollider;
+    //private Collider2D myCollider;
 
     private Animator myAnimator;
 
@@ -20,14 +29,26 @@ public class Player : MonoBehaviour
     void Start()
     {
         myRigidody = GetComponent<Rigidbody2D>();
-        myCollider = GetComponent<Collider2D>();
+        //myCollider = GetComponent<Collider2D>();
         myAnimator = GetComponent<Animator>();
+
+        jumpTimeCounter = jumpTime;
+        speedMilestoneCount = speedIncreaseMilestone;
     }
 
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics2D.IsTouchingLayers(myCollider, whatIsGround);
+        //grounded = Physics2D.IsTouchingLayers(myCollider, whatIsGround);
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+
+        if(transform.position.x > speedMilestoneCount)
+        {
+            speedMilestoneCount += speedIncreaseMilestone;
+            speedIncreaseMilestone += speedIncreaseMilestone * speedMultiplier;
+            moveSpeed = moveSpeed * speedMultiplier;
+        }
+
 
         myRigidody.velocity = new Vector2(moveSpeed, myRigidody.velocity.y);
 
@@ -37,6 +58,25 @@ public class Player : MonoBehaviour
             {
                 myRigidody.velocity = new Vector2(myRigidody.velocity.x, JumpForce);
             }
+        }
+
+        if(Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            if(jumpTimeCounter > 0)
+            {
+                myRigidody.velocity = new Vector2(myRigidody.velocity.x, JumpForce);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+        }
+
+        if(Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
+        {
+            jumpTimeCounter = 0;
+        }
+
+        if(grounded)
+        {
+            jumpTimeCounter = jumpTime;
         }
 
         myAnimator.SetFloat("Speed", myRigidody.velocity.x);

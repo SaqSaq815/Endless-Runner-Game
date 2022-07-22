@@ -878,7 +878,7 @@ MonoBehaviour:
   - {fileID: 103879063}
   - {fileID: 374544688}
   maxHeightPoint: {fileID: 230722130}
-  maxHeightChange: 3
+  maxHeightChange: 6
   randomCoinThreshold: 20
 --- !u!4 &552188750
 Transform:

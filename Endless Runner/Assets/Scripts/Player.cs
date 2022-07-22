@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     public float jumpTime;
     private float jumpTimeCounter;
 
+    private bool stoppedJumping; //for disabling the double jump / jump after cliff effect!
+    private bool canDoubleJump;
+
     private Rigidbody2D myRigidody;
 
     public bool grounded;
@@ -42,6 +45,8 @@ public class Player : MonoBehaviour
         moveSpeedStore = moveSpeed;
         speedMilestoneCountStore = speedMilestoneCount;
         speedIncreaseMilestoneStore = speedIncreaseMilestone;
+
+        stoppedJumping = true; //for disabling the double jump / jump after cliff effect!
     }
 
     // Update is called once per frame
@@ -65,10 +70,19 @@ public class Player : MonoBehaviour
             if(grounded)
             {
                 myRigidody.velocity = new Vector2(myRigidody.velocity.x, JumpForce);
+                stoppedJumping = false; //for disabling the double jump / jump after cliff effect!
+            }
+
+            if (!grounded && canDoubleJump)
+            {
+                myRigidody.velocity = new Vector2(myRigidody.velocity.x, JumpForce);
+                jumpTimeCounter = jumpTime;
+                stoppedJumping = false;
+                canDoubleJump = false;
             }
         }
 
-        if(Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        if((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !stoppedJumping) // "&& !stoppedJumping" for disabling the double jump / jump after cliff effect!
         {
             if(jumpTimeCounter > 0)
             {
@@ -80,11 +94,13 @@ public class Player : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
         {
             jumpTimeCounter = 0;
+            stoppedJumping = true; //for disabling the double jump / jump after cliff effect!
         }
 
         if(grounded)
         {
             jumpTimeCounter = jumpTime;
+            canDoubleJump = true;
         }
 
         myAnimator.SetFloat("Speed", myRigidody.velocity.x);

@@ -26,8 +26,10 @@ public class PlatformGenerator : MonoBehaviour
     private float heightChange;
 
     private CoinGenerator theCoinGenerator;
-
     public float randomCoinThreshold;
+
+    public float randomSpikeThreshold;
+    public ObjectPooler spikePool; //change to enemyPool later on if i have more obstacles
 
 
     // Start is called before the first frame update
@@ -77,9 +79,22 @@ public class PlatformGenerator : MonoBehaviour
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
 
-            if (Random.Range(0f, 100f) < randomCoinThreshold)
+            if (Random.Range(0f, 100f) < randomCoinThreshold) // do similar to random spike\enemy code below to randomize coin position on bloc
             {
                 theCoinGenerator.SpawnCoins(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
+            }
+
+            if (Random.Range(0f, 100f) < randomSpikeThreshold) // to change later!
+            {
+                GameObject newSpike = spikePool.GetPooledObject();
+
+                float spikeXPosition = Random.Range(-platformWidths[platformSelector] / 2f + 1, platformWidths[platformSelector] / 2f - 1);
+
+                Vector3 spikePosition = new Vector3(spikeXPosition, 0.5f, 0f);
+
+                newSpike.transform.position = transform.position + spikePosition;
+                newSpike.transform.rotation = transform.rotation;
+                newSpike.SetActive(true);
             }
 
             transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), transform.position.y, transform.position.z);

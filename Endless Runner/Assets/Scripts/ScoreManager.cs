@@ -15,6 +15,8 @@ public class ScoreManager : MonoBehaviour
 
     public bool scoreIncreasing;
 
+    public bool shouldDouble;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +47,13 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int pointsToAdd)
     {
+        if (shouldDouble)
+        {
+            pointsToAdd = pointsToAdd * 2;
+        }
+
         scoreCount += pointsToAdd;
+
     }
 
 }

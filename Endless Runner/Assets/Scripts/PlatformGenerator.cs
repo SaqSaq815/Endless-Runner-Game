@@ -31,6 +31,9 @@ public class PlatformGenerator : MonoBehaviour
     public float randomSpikeThreshold;
     public ObjectPooler spikePool; //change to enemyPool later on if i have more obstacles
 
+    public float powerupHeight;
+    public ObjectPooler powerupPool;
+    public float powerupThreshold;
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +72,18 @@ public class PlatformGenerator : MonoBehaviour
                 heightChange = minHeight;
             }
             
+
+            if(Random.Range(0f, 100f) < powerupThreshold)
+            {
+                GameObject newPowerup = powerupPool.GetPooledObject();
+
+                newPowerup.transform.position = transform.position + new Vector3(distanceBetween / 2f, Random.Range(powerupHeight / 2f, powerupHeight), 0f);
+
+                newPowerup.SetActive(true);
+            }
+
+
+
             transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetween, heightChange, transform.position.z);            
 
             //Instantiate(/*thePlatform*/ theObjectPools[platformSelector], transform.position, transform.rotation);

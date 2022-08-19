@@ -17,6 +17,8 @@ public class PowerupManager : MonoBehaviour
     private float normalPointsPerSecond;
     private float spikeRate;
 
+    private PlatformDestroyer[] spikeList;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +63,19 @@ public class PowerupManager : MonoBehaviour
 
         normalPointsPerSecond = theScoreManager.pointsPerSecond;
         spikeRate = thePlatformGenerator.randomSpikeThreshold;
+
+        if (safeMode)
+        {
+            spikeList = FindObjectsOfType<PlatformDestroyer>();
+            for (int i = 0; i < spikeList.Length; i++)
+            {
+                if (spikeList[i].gameObject.name.Contains("Spikes"))
+                {
+                    spikeList[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
         powerupActive = true;
     }
 }
